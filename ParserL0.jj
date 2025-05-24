@@ -18,6 +18,18 @@ SKIP :
 TOKEN :
 {
 
+  < NIL : "nil" >
+  |
+  < CONS: "::" >
+  |
+  < LAZYCONS: ":?">
+  |
+  < MATCH: "match" >
+  |
+  < BAR : "|" >
+  |
+  < SARROW: "->" >
+  |
   < LET : "let" >
   |
   < TRUE: "true" >
@@ -179,18 +191,29 @@ ASTNode Rel() :
      { return t1; } 
 }
 
-
 ASTNode Exp() :
-{ Token op;
-  ASTNode t1, t2; }
 {
-     t1=Term() ( ( op=<PLUS> | op=<MINUS> ) t2=Term() 
-                 { if (op.kind == PLUS) 
-                         t1 = new ASTPlus(t1,t2);
-                   else  t1 = new ASTSub(t1,t2);
-                 } 
-               ) *
-     { return t1; } 
+    ASTNode t1, t2, nilCase, consCase;
+    Token op, id1, id2;
+}
+{
+    <MATCH> t1=Term() <LBRA>
+        <NIL> <SARROW> nilCase=Exp() <BAR>
+        id1=<Id> <CONS> id2=<Id> <SARROW> consCase=Let()
+    <RBRA>
+    { return new ASTMatch(t1, nilCase, id1.image, id2.image, consCase); }
+
+    | 
+    t1=Term() (
+        <CONS> t2=Term() { t1 = new ASTCons(t1, t2, false); }
+      | <LAZYCONS> t2=Term() { t1 = new ASTCons(t1, t2, true); }
+      | ( op=<PLUS> | op=<MINUS> ) t2=Term()
+            { if (op.kind == PLUS)
+                    t1 = new ASTPlus(t1,t2);
+              else  t1 = new ASTSub(t1,t2);
+            }
+      )*
+    { return t1; }
 }
 
 ASTNode Term() :
@@ -220,6 +243,7 @@ ASTNode Fact() :
     | n=<TRUE> { t = new ASTTrue(); }
     | n=<FALSE> {  t = new ASTFalse();}
     | n=<Id> { t = new ASTId(n.image); } 
+    | <NIL> { t = new ASTNil(); }
     | <BOX> t=Fact() {  t = new ASTBox(t); }
     | <STAR> t=Fact() { t = new ASTStar(t); }
     | <MINUS> t=Fact() { t = new ASTNeg(t); }
