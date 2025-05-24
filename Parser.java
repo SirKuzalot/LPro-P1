@@ -242,7 +242,7 @@ public class Parser implements ParserConstants {
       jj_consume_token(CONS);
       id2 = jj_consume_token(Id);
       jj_consume_token(SARROW);
-      consCase = Let();
+      consCase = Seq();
       jj_consume_token(RBRA);
       {if (true) return new ASTMatch(t1, nilCase, id1.image, id2.image, consCase);}
       break;
@@ -278,13 +278,13 @@ public class Parser implements ParserConstants {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case CONS:
           jj_consume_token(CONS);
-          t2 = Term();
-                           t1 = new ASTCons(t1, t2, false);
+          t2 = Exp();
+                          t1 = new ASTCons(t1, t2, false);
           break;
         case LAZYCONS:
           jj_consume_token(LAZYCONS);
-          t2 = Term();
-                               t1 = new ASTCons(t1, t2, true);
+          t2 = Exp();
+                              t1 = new ASTCons(t1, t2, true);
           break;
         case PLUS:
         case MINUS:

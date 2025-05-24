@@ -199,14 +199,14 @@ ASTNode Exp() :
 {
     <MATCH> t1=Term() <LBRA>
         <NIL> <SARROW> nilCase=Exp() <BAR>
-        id1=<Id> <CONS> id2=<Id> <SARROW> consCase=Let()
+        id1=<Id> <CONS> id2=<Id> <SARROW> consCase=Seq()
     <RBRA>
     { return new ASTMatch(t1, nilCase, id1.image, id2.image, consCase); }
 
     | 
     t1=Term() (
-        <CONS> t2=Term() { t1 = new ASTCons(t1, t2, false); }
-      | <LAZYCONS> t2=Term() { t1 = new ASTCons(t1, t2, true); }
+        <CONS> t2=Exp() { t1 = new ASTCons(t1, t2, false); }
+      | <LAZYCONS> t2=Exp() { t1 = new ASTCons(t1, t2, true); }
       | ( op=<PLUS> | op=<MINUS> ) t2=Term()
             { if (op.kind == PLUS)
                     t1 = new ASTPlus(t1,t2);
