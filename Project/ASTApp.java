@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public class ASTApp implements ASTNode {
     ASTNode n1;
     ASTNode n2;
