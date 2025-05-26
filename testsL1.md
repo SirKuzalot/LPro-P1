@@ -47,13 +47,20 @@ let L = 1000;
 let m = box(L);
 let fnxt = box(1);
 while (*m>0) {
-    m := *m - 1;
     let t = *fnxt;
+    m := *m - 1;
     fnxt := *fnxt + *fp;
     fp := t
 };
 *fp
 ;;
+
+let m = box(4);
+while (*m==4) {
+    m := *m - 1;
+    nil
+};
+m;;
 
 
 let sigfpe = box ( fn x=>{x} );

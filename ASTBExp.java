@@ -3,7 +3,7 @@ public class ASTBExp implements ASTNode {
     ASTNode right;
     String op;
 
-    ASTBExp(ASTNode l, String o, ASTNode r) {
+    public ASTBExp(ASTNode l, String o, ASTNode r) {
         left = l;
         op = o;
         right = r;

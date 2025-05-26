@@ -22,6 +22,15 @@ public class ASTMatch implements ASTNode {
             IValue result = consCase.eval(env2);
             env2.endScope();
             return result;
+        } else if (v instanceof VLazyCons) {
+            VLazyCons lazyCons = (VLazyCons) v;
+            lazyCons.force();
+            Environment<IValue> env2 = e.beginScope();
+            env2.assoc(headId, lazyCons.getHead());
+            env2.assoc(tailId, lazyCons.getTail());
+            IValue result = consCase.eval(env2);
+            env2.endScope();
+            return result;
         } else {
             throw new InterpreterError("Match on non-list value");
         }

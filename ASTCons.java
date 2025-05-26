@@ -7,16 +7,10 @@ public class ASTCons implements ASTNode {
         this.isLazy = isLazy;
     }
     public IValue eval(Environment<IValue> e) throws InterpreterError {
-        IValue h = head.eval(e);
         if (isLazy) {
-            return new VCons(h, () -> {
-                try {
-                    return tail.eval(e);
-                } catch (InterpreterError ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
+            return new VLazyCons(head, tail, e);
         } else {
+            IValue h = head.eval(e);
             return new VCons(h, tail.eval(e));
         }
     }

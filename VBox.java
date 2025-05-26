@@ -1,7 +1,7 @@
 public class VBox implements IValue {
     IValue v;
 
-    VBox(IValue v0) {
+    public VBox(IValue v0) {
         v = v0;
     }
 

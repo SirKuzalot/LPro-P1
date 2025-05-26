@@ -1,7 +1,7 @@
 class VBool implements IValue {
     boolean b;
 
-    VBool(boolean b0) {
+    public VBool(boolean b0) {
         b = b0;
     }
     boolean getval() {

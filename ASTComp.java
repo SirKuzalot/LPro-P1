@@ -3,7 +3,7 @@ public class ASTComp implements ASTNode {
     ASTNode right;
     String op;
 
-    ASTComp(ASTNode left0, String op0, ASTNode right0) {
+    public ASTComp(ASTNode left0, String op0, ASTNode right0) {
         left = left0;
         op = op0;
         right = right0;
@@ -27,7 +27,7 @@ public class ASTComp implements ASTNode {
                     return new VBool(lv >= rv);
                 case "==":
                     return new VBool(lv == rv);
-                case "!=":
+                case "~=":
                     return new VBool(lv != rv);
                 default:
                     throw new InterpreterError("Unknown operator: " + op);

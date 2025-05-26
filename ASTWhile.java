@@ -2,7 +2,7 @@ public class ASTWhile implements ASTNode {
     ASTNode cond;
     ASTNode body;
 
-    ASTWhile(ASTNode cond, ASTNode body) {
+    public ASTWhile(ASTNode cond, ASTNode body) {
         this.cond = cond;
         this.body = body;
     }

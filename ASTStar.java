@@ -18,7 +18,11 @@ public class ASTStar implements ASTNode {
                 return (VFun) v;
             } else if (v instanceof VBox) {
                 return (VBox) v;
-            } else {
+            } else if (v instanceof VCons) {
+                return (VCons) v;
+            } else if (v instanceof VLazyCons) {
+                return (VLazyCons) v;
+            }else {
                 throw new InterpreterError("Attempting to unbox an invalid value");
             }
         } else {

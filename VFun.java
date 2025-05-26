@@ -7,7 +7,7 @@ public class VFun implements IValue {
     ASTNode body;
     Environment<IValue> env;
 
-    VFun(List<String> parameters0, ASTNode body0, Environment<IValue> env0) {
+    public VFun(List<String> parameters0, ASTNode body0, Environment<IValue> env0) {
         parameters = parameters0;
         body = body0;
         env = env0;

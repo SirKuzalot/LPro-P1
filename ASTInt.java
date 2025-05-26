@@ -1,7 +1,7 @@
 class ASTInt implements ASTNode  {
     int v;
 
-    ASTInt(int v0) {
+    public ASTInt(int v0) {
         v = v0;
     }
 

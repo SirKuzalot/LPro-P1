@@ -1,11 +1,10 @@
 import java.util.List;
-import java.util.ArrayList;
 
 public class ASTFun implements ASTNode {
     List<String> parameters;
     ASTNode body;
 
-    ASTFun(List<String> parameters0, ASTNode body0) {
+    public ASTFun(List<String> parameters0, ASTNode body0) {
         parameters = parameters0;
         body = body0;
     }
