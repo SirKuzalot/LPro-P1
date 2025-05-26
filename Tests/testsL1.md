@@ -61,7 +61,7 @@ while (*m==4) {
     m := *m - 1;
     nil
 };
-m;;
+*m;;
 
 
 let sigfpe = box ( fn x=>{x} );
