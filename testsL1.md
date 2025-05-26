@@ -46,6 +46,7 @@ while (*m>0) {
 let L = 1000;
 let m = box(L);
 let fnxt = box(1);
+let fp = box(0);
 while (*m>0) {
     let t = *fnxt;
     m := *m - 1;

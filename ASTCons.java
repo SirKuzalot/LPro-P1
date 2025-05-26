@@ -10,8 +10,7 @@ public class ASTCons implements ASTNode {
         if (isLazy) {
             return new VLazyCons(head, tail, e);
         } else {
-            IValue h = head.eval(e);
-            return new VCons(h, tail.eval(e));
+            return new VCons(head.eval(e), tail.eval(e));
         }
     }
 }
