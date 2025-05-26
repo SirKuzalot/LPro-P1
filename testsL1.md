@@ -77,7 +77,7 @@ div (2) (0)
 /* some functions to encode mutable pairs */
 let knot = box (fn x => {x});
 let fact = fn n => {
-      if (n==0) { 1}
+      if (n==0) { 1 }
         else { n * ((*knot)( n - 1 ))}};
 knot := fact;
 fact (6)
